@@ -1,0 +1,48 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#Brand ID</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="paginateBrands.length > 0">
+        <tr *ngFor="let brand of paginateBrands">
+          <th scope="row">{{ brand.brandId }}</th>
+          <td>{{ brand.brandName }}</td>
+          <td>{{ brand.state }}</td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="paginateBrands.length == 0">
+        <td colspan="3">
+          <div class="d-flex justify-content-center">
+            <span>Srroy, No Data Is Returned Yet At The Moment</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="collectionSize"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="getPaginateBrands()"
+    >
+    </ngb-pagination>
+
+    <select
+      class="custom-select"
+      style="width: auto"
+      [(ngModel)]="pageSize"
+      (ngModelChange)="getPaginateBrands()"
+    >
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
+</div>
